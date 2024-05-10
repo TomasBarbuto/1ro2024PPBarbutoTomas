@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Styles.css">
+    <title>Form Datos</title>
+</head>
+
+<body>
+    <div class="recuadro">
+        <h2>Form Datos</h2>
+
+        <label for="filtroTipo">Filtrar Por:</label>
+        <select id="filtroTipo">
+            <option value="Persona">Persona</option>
+            <option value="Ciudadano">Ciudadano</option>
+            <option value="Extranjero">Extranjero</option>
+        </select>
+
+        <br><br>
+        <div class="calcular-container">
+            <label for="calcularEdadPromedio" class="labelPromedio">Calcular Edad Promedio:</label>
+            <button class="calcular-btn" onclick="calcularEdadPromedio()">Calcular</button>
+            <div class="resultado-container">
+                <div id="calcularEdadPromedio" class="resultado"></div>
+            </div>
+        </div>
+        <br><br>
+
+        <label>Mostrar Columnas:</label><br><br>
+
+        <div class="checkboxes-container">
+            <div class="checkbox-container">
+                <input type="checkbox" id="chkId" checked>
+                <label for="chkId">ID</label>
+            </div>
+
+            <div class="checkbox-container">
+                <input type="checkbox" id="chkNombre" checked>
+                <label for="chkNombre">Nombre</label>
+            </div>
+
+            <div class="checkbox-container">
+                <input type="checkbox" id="chkApellido" checked>
+                <label for="chkApellido">Apellido</label>
+            </div>
+
+            <div class="checkbox-container">
+                <input type="checkbox" id="chkEdad" checked>
+                <label for="chkEdad">Edad</label>
+            </div>
+
+            <div class="checkbox-container">
+                <input type="checkbox" id="chkDNI">
+                <label for="chkDNI">DNI</label>
+            </div>
+
+            <div class="checkbox-container">
+                <input type="checkbox" id="chkPaisOrigen">
+                <label for="chkPaisOrigen">Pais Origen</label>
+            </div>
+
+        </div>
+        <br><br>
+        <table id="tablaDatos">
+            <thead>
+                <tr>
+                    <th id="thId" data-index="0">
+                        <div class="column-header">
+                            <span>ID</span>
+                            <div class="orden-btns">
+                                <button class="orden-btn" data-column="0" data-order="asc">▲</button>
+                                <button class="orden-btn" data-column="0" data-order="desc">▼</button>
+                            </div>
+                        </div>
+                    </th>
+                    <th id="thNombre" data-index="1">
+                        <div class="column-header">
+                            <span>Nombre</span>
+                            <div class="orden-btns">
+                                <button class="orden-btn" data-column="1" data-order="asc">▲</button>
+                                <button class="orden-btn" data-column="1" data-order="desc">▼</button>
+                            </div>
+                        </div>
+                    </th>
+                    <th id="thApellido" data-index="2">
+                        <div class="column-header">
+                            <span>Apellido</span>
+                            <div class="orden-btns">
+                                <button class="orden-btn" data-column="2" data-order="asc">▲</button>
+                                <button class="orden-btn" data-column="2" data-order="desc">▼</button>
+                            </div>
+                        </div>
+                    </th>
+                    <th id="thEdad" data-index="3">
+                        <div class="column-header">
+                            <span>Edad</span>
+                            <div class="orden-btns">
+                                <button class="orden-btn" data-column="3" data-order="asc">▲</button>
+                                <button class="orden-btn" data-column="3" data-order="desc">▼</button>
+                            </div>
+                        </div>
+                    </th>
+                    <th id="thDNI" data-index="4">
+                        <div class="column-header">
+                            <span>DNI</span>
+                            <div class="orden-btns">
+                                <button class="orden-btn" data-column="4" data-order="asc">▲</button>
+                                <button class="orden-btn" data-column="4" data-order="desc">▼</button>
+                            </div>
+                        </div>
+                    </th>
+                    <th id="thPaisOrigen" data-index="5">
+                        <div class="column-header">
+                            <span>Pais Origen</span>
+                            <div class="orden-btns">
+                                <button class="orden-btn" data-column="5" data-order="asc">▲</button>
+                                <button class="orden-btn" data-column="5" data-order="desc">▼</button>
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="cuerpoTabla"></tbody>
+        </table>
+
+        <div class="botones-container">
+            <button class="agregar" onclick="mostrarFormularioAgregar()">Alta</button>
+            <button id="botonModificar" onclick="mostrarFormularioModificacion()">Modificar</button>
+            <button class="darDeBaja">Baja</button>
+        </div>
+
+    </div>
+
+    <div id="formAgregar" style="display: none;">
+        <h2>Agregar Persona</h2>
+
+        <div id="camposPersona">
+            <label for="nuevoNombre">Nombre:</label>
+            <input type="text" id="nuevoNombre"><br>
+
+            <label for="nuevoApellido">Apellido:</label>
+            <input type="text" id="nuevoApellido"><br>
+
+            <label for="nuevoFechaDeNaciomiento">Fecha de Nacimiento(AAAAMMDD):</label>
+            <input type="number" id="nuevaFechaDeNacimiento"><br>
+
+            <label for="nuevoTipo">Tipo:</label>
+            <select id="nuevoTipo">
+                <option>Seleccione</option>
+                <option value="Ciudadano">Ciudadano</option>
+                <option value="Extranjero">Extranjero</option>
+            </select><br>
+        </div>
+
+        <div id="camposExtras" style="display: none;">
+            <label for="nuevoDNI" id="labelDNI">DNI:</label>
+            <input type="number" id="nuevoDNI"><br>
+
+            <label for="nuevoPaisOrigen" id="labelPaisOrigen">Pais de Origen:</label>
+            <input type="string" id="nuevoPaisOrigen"><br>
+        </div>
+
+        <div class="buttons-container">
+            <button onclick="agregarPersona()">Aceptar</button>
+            <button onclick="ocultarFormularioAgregar()">Cancelar</button>
+        </div>
+    </div>
+
+    <div id="formModificar" style="display: none;">
+        <h2>Modificar Persona</h2>
+
+        <div id="camposModificar">
+            <label for="modificarId">ID: <span id="modificarId" class="idAModificar"></span></label>
+            <br>
+
+            <label for="modificarNombre">Nombre:</label>
+            <input type="text" id="modificarNombre"><br>
+
+            <label for="modificarApellido">Apellido:</label>
+            <input type="text" id="modificarApellido"><br>
+
+            <label for="modificarFechaDeNacimiento">FechaDeNacimiento:</label>
+            <input type="number" id="modificarFechaDeNacimiento"><br>
+        </div>
+
+        <div id="camposExtrasModificar" style="display: none;">
+            <label for="modificarDNI" id="labelDNIModificar">DNI:</label>
+            <input type="number" id="modificarDNI"><br>
+
+            <label for="modificarPaisOrigen" id="labelPaisOrigenModificar">Pais de Origen:</label>
+            <input type="number" id="modificarPaisOrigen"><br>
+        </div>
+        <div class="buttons-container">
+            <button onclick="modificarPersona()">Aceptar</button>
+            <button onclick="ocultarFormularioModificacion()">Cancelar</button>
+        </div>
+    </div>
+
+    <script src="App.js"></script>
+</body>
+
+</html>
