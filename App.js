@@ -64,7 +64,7 @@ class Extranjero extends Persona {
     constructor(id, nombre, apellido, fechaNacimiento, paisOrigen) {
         super(id, nombre, apellido, fechaNacimiento);
         if (paisOrigen === null) {
-            throw new Error("El país de origen no puede ser nulo");
+            throw new Error("Debe seleccionar un país de origen.");
         }
         this.paisOrigen = paisOrigen;
     }
@@ -268,7 +268,7 @@ document.getElementById("nuevoTipo").addEventListener("change", function () {
     } else if (tipoSeleccionado === "Extranjero") {
         camposExtras.innerHTML = `
         <label for="nuevoPaisOrigen" id="labelPaisOrigen">Pais de Origen:</label>
-        <input type="string" id="nuevoPaisOrigen"><br>
+        <input type="text" id="nuevoPaisOrigen"><br>
         `;
     }
 
@@ -300,9 +300,17 @@ function agregarPersona() {
             let nuevaPersona;
             if (tipoSeleccionado === "Ciudadano") {
                 const nuevoDNI = document.getElementById("nuevoDNI").value;
+                if (!nuevoDNI || nuevoDNI <= 0) {
+                    alert("el DNI debe ser mayor a 0.");
+                    return;
+                }
                 nuevaPersona = new Ciudadano(nuevoId, nuevoNombre, nuevoApellido, parseInt(nuevaFechaDeNacimiento), parseInt(nuevoDNI));
             } else if (tipoSeleccionado === "Extranjero") {
                 const nuevoPaisOrigen = document.getElementById("nuevoPaisOrigen").value;
+                if (!nuevoPaisOrigen) {
+                    alert("Por favor, complete todos los campos.");
+                    return;
+                }
                 nuevaPersona = new Extranjero(nuevoId, nuevoNombre, nuevoApellido, parseInt(nuevaFechaDeNacimiento), nuevoPaisOrigen);
             }
 
@@ -332,11 +340,11 @@ buttons.forEach(button => {
     });
 });
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const sortableHeaders = document.querySelectorAll(".sortable");
 
     sortableHeaders.forEach(header => {
-        header.addEventListener("click", function() {
+        header.addEventListener("click", function () {
             const columnIndex = this.dataset.column;
             const order = this.querySelector(".orden-btn[data-order]").dataset.order;
             ordenarFilasPorColumna(columnIndex, order);
@@ -380,7 +388,7 @@ function limpiarCamposFormulario() {
     document.getElementById("nuevoPaisOrigen").value = "";
 }
 
-document.querySelector(".darDeBaja").addEventListener("click", function (){
+document.querySelector(".darDeBaja").addEventListener("click", function () {
 
     const filaSeleccionada = document.querySelector(".selected-row");
 
