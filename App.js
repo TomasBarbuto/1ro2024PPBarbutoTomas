@@ -340,18 +340,6 @@ buttons.forEach(button => {
     });
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-    const sortableHeaders = document.querySelectorAll(".sortable");
-
-    sortableHeaders.forEach(header => {
-        header.addEventListener("click", function () {
-            const columnIndex = this.dataset.column;
-            const order = this.querySelector(".orden-btn[data-order]").dataset.order;
-            ordenarFilasPorColumna(columnIndex, order);
-        });
-    });
-});
-
 function ordenarFilasPorColumna(columnIndex, order) {
     const tbody = document.getElementById("cuerpoTabla");
     const rows = Array.from(tbody.getElementsByTagName("tr"));
